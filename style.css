@@ -1,0 +1,1236 @@
+/*
+  style.css
+
+  This stylesheet defines the look and feel of the Inner Reflections blog.
+  It uses CSS custom properties for easy theming and supports a dark mode.
+*/
+
+/* CSS Variables for light theme */
+:root {
+  --background: #ffffff;
+  --text: #333333;
+  --secondary-text: #555555;
+  /* Personalised accent palette: softer purples and blues evoke a contemplative mood */
+  --accent: #9d7ac8;
+  /* Hover state shifts toward a deeper lavender */
+  --link-hover: #b08fd8;
+  --card-bg: #fafafa;
+  --border-color: #e5e5e5;
+  --button-bg: #8d6fc6;
+  --button-text: #ffffff;
+  --button-hover: #7a5bb1;
+  --footer-bg: #f8f8f8;
+  --toc-bg: #f9f9f9;
+  --toc-border: #e0e0e0;
+
+  /* Complementary highlights and muted backgrounds */
+  --highlight: #c2acf2;
+  --muted-bg: #f5f2fa;
+
+  /* A gentle pastel gradient used in select sections */
+  --gradient-accent: linear-gradient(135deg, #f3dce4, #c8d4f8, #e9dbff);
+}
+
+/* Dark theme overrides */
+.dark-mode {
+  /* Dark mode palette adjusted for a more minimal and moody feel */
+  /* Deep black base for the dark theme */
+  --background: #01030a;
+  --text: #e6e5ef;
+  --secondary-text: #9fa2b8;
+  /* Personalised dark mode colours: deeper purples with hints of starlight */
+  --accent: #bca5ff;
+  --link-hover: #d7c6ff;
+  --card-bg: #0c1323;
+  --border-color: #1c2640;
+  --button-bg: #7f65b6;
+  --button-text: #ffffff;
+  --button-hover: #6c54a1;
+  --footer-bg: #0c1323;
+  --toc-bg: #0c1323;
+  --toc-border: #1c2640;
+
+  /* Adjust highlights for dark mode */
+  --highlight: #dccbf5;
+  --gradient-accent: linear-gradient(135deg, #2c1a4f, #173d59, #2f285c);
+
+  /*
+    Cosmic background for depth on dark pages
+    An overlay gradient keeps the foreground legible while
+    the underlying starscape adds a sense of the infinite.
+  */
+  background-image: linear-gradient(rgba(1, 3, 10, 0.92), rgba(1, 3, 10, 0.92)), url('images/cosmic-bg.png');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Use Inter for body copy to complement the Playfair headings */
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.7;
+
+  /* Prevent unwanted horizontal scrollbars due to full-width decorative shapes */
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.site-header {
+  background: var(--background);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--highlight);
+}
+
+/* Navigation */
+.site-nav {
+  flex-grow: 1;
+  margin-left: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li + li {
+  margin-left: 1.5rem;
+}
+
+.nav-links a {
+  font-weight: 600;
+  color: var(--text);
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.2s ease-in-out;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus::after {
+  width: 100%;
+}
+
+/* Navigation Toggle (hamburger) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle span {
+  width: 100%;
+  height: 2px;
+  background-color: var(--text);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.3rem;
+  margin-left: 1rem;
+  color: var(--text);
+}
+
+/* Hero section */
+.hero {
+  background-image: url('images/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Posts list */
+.posts-list {
+  padding: 3rem 0;
+}
+
+.posts-list h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--text);
+  text-align: center;
+}
+
+.post-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.post-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-4px);
+}
+
+.post-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.post-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.post-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.post-content p {
+  font-size: 0.9rem;
+  color: var(--secondary-text);
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  font-weight: 600;
+  align-self: flex-start;
+  color: var(--accent);
+}
+
+/* Newsletter section */
+.newsletter {
+  background-color: var(--card-bg);
+  padding: 3rem 1rem;
+  margin: 3rem auto;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+
+.newsletter h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter p {
+  margin-bottom: 1.5rem;
+  color: var(--secondary-text);
+}
+
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subscribe-form input[type='email'] {
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.subscribe-form button {
+  padding: 0.7rem 1.5rem;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.subscribe-form button:hover {
+  background-color: var(--button-hover);
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--footer-bg);
+  padding: 2rem 0;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social-links a {
+  margin: 0 0.5rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Blog post page */
+.blog-post {
+  padding: 3rem 1rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.blog-post .post-meta {
+  color: var(--secondary-text);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-post h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-post .post-body {
+  flex: 1;
+  max-width: 700px;
+}
+
+.blog-post .post-body h2 {
+  font-family: 'Playfair Display', serif;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+}
+
+.blog-post .post-body p {
+  margin-bottom: 1rem;
+  color: var(--secondary-text);
+}
+
+/* Table of Contents */
+.toc {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 6rem;
+  align-self: flex-start;
+  background-color: var(--toc-bg);
+  border: 1px solid var(--toc-border);
+  border-radius: 4px;
+  padding: 1rem;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  font-size: 0.9rem;
+}
+
+.toc h3 {
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.toc li {
+  margin-bottom: 0.5rem;
+}
+
+.toc a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 64px;
+    right: -100%;
+    flex-direction: column;
+    background-color: var(--background);
+    width: 60%;
+    height: calc(100% - 64px);
+    padding: 2rem;
+    transition: right 0.3s ease-in-out;
+    border-left: 1px solid var(--border-color);
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links li + li {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  .blog-post {
+    flex-direction: column;
+  }
+
+  .toc {
+    width: 100%;
+    position: relative;
+    top: 0;
+    margin-bottom: 2rem;
+  }
+}
+
+/* --- New layout styles for the minimal redesign --- */
+
+/* Intro section styles */
+.intro {
+  padding: 4rem 1rem 3rem;
+  text-align: center;
+}
+
+.intro-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  color: var(--highlight);
+  margin-bottom: 1rem;
+}
+
+.intro-subtitle {
+  font-size: 1.1rem;
+  color: var(--secondary-text);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Quote section */
+/* Quote section */
+.quote-section {
+  /* Use the gradient accent and animate it slowly for a soothing effect */
+  background-image: var(--gradient-accent);
+  background-size: 400% 400%;
+  animation: gradientMove 20s ease infinite;
+  padding: 2rem 1rem;
+  text-align: center;
+  border: none;
+  color: var(--text);
+}
+
+.quote-section blockquote {
+  font-size: 1.2rem;
+  /* Light text for better readability on pastel gradient */
+  color: var(--text);
+}
+
+.quote-author {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  /* Use light text on gradient */
+  color: var(--accent);
+}
+
+/* Hero image section */
+.hero-image img {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* Featured article section */
+.feature {
+  padding: 4rem 0;
+}
+
+.feature-grid {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.feature-text {
+  /* Prioritise the text portion of the feature section */
+  flex: 2;
+}
+
+.feature-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--highlight);
+}
+
+.feature-text p {
+  color: var(--secondary-text);
+  margin-bottom: 1rem;
+}
+
+.feature-image {
+  /* Allocate less space to the image to keep focus on the copy */
+  flex: 1;
+}
+
+.feature-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Recent articles */
+.recent {
+  padding: 4rem 0;
+}
+
+.recent h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--highlight);
+}
+
+.recent-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.recent-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--border-color);
+}
+
+.recent-card:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+.recent-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.recent-content {
+  padding: 1rem;
+}
+
+.recent-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.recent-content h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.recent-date {
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+}
+
+/* Outro section */
+.outro {
+  padding: 3rem 1rem 4rem;
+  text-align: center;
+  /* A light gradient to conclude the page gracefully with subtle motion */
+  background-image: var(--gradient-accent);
+  background-size: 400% 400%;
+  animation: gradientMove 20s ease infinite;
+}
+
+.outro p {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  /* Use light text on the pastel gradient for readability */
+  color: var(--text);
+  max-width: 800px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+/* Responsive adjustments for feature section on small screens */
+@media (max-width: 768px) {
+  .feature-grid {
+    flex-direction: column;
+  }
+  .feature-image img {
+    height: auto;
+  }
+  .hero-image img {
+    height: 40vh;
+  }
+  .intro-title {
+    font-size: 2.4rem;
+  }
+}
+
+/* Additional responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .intro-title {
+    font-size: 2rem;
+  }
+  .intro-subtitle {
+    font-size: 0.9rem;
+  }
+  .hero-image img {
+    width: auto;
+    max-height: 50vh;
+  }
+  .recent-cards {
+    grid-template-columns: 1fr;
+  }
+  .feature-grid {
+    flex-direction: column;
+  }
+  .feature-image img {
+    height: auto;
+  }
+}
+
+/* Section heading */
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--highlight);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Themes section */
+.themes {
+  padding: 4rem 0;
+}
+.theme-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+.theme-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.theme-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+.theme-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 1rem;
+  filter: brightness(0.9);
+}
+.theme-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--highlight);
+}
+.theme-card p {
+  color: var(--secondary-text);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.theme-link {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Quotes section */
+.quotes-section {
+  padding: 3rem 1rem;
+  position: relative;
+  overflow: hidden;
+  /* Blend cosmic swirl with dark overlay */
+  background-image: linear-gradient(to bottom right, rgba(15, 14, 31, 0.75), rgba(23, 40, 70, 0.75)), url('images/swirl.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+.quotes-container {
+  position: relative;
+  min-height: 140px;
+}
+.quote-slide {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 1s ease;
+  max-width: 700px;
+  width: 100%;
+  padding: 0 1rem;
+}
+.quote-slide.active {
+  opacity: 1;
+}
+.quote-slide blockquote {
+  font-size: 1.4rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text);
+}
+.quote-author {
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-top: 0.5rem;
+}
+
+/* Timeline section */
+.timeline-section {
+  padding: 4rem 0;
+}
+.timeline {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding-left: 2rem;
+  border-left: 2px solid var(--border-color);
+  position: relative;
+}
+.timeline li {
+  position: relative;
+  margin-bottom: 2rem;
+}
+.timeline-circle {
+  position: absolute;
+  left: -1rem;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+.timeline-content {
+  margin-left: 1.5rem;
+}
+.timeline-content h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--highlight);
+  margin-bottom: 0.3rem;
+}
+.timeline-content p {
+  font-size: 0.9rem;
+  color: var(--secondary-text);
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .timeline {
+    flex-direction: row;
+    padding-left: 0;
+    border-left: none;
+  }
+  .timeline li {
+    flex: 1;
+    padding-left: 0;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--border-color);
+    z-index: -1;
+  }
+  .timeline li:first-child::before {
+    left: 50%;
+    width: 50%;
+  }
+  .timeline li:last-child::before {
+    width: 50%;
+  }
+  .timeline-circle {
+    position: static;
+    margin: 0 auto 0.5rem;
+  }
+  .timeline-content {
+    margin-left: 0;
+  }
+}
+
+/* Reading progress bar */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--accent);
+  width: 0%;
+  z-index: 200;
+  transition: width 0.2s ease-out;
+}
+
+/* Callout boxes for highlighted lists */
+.callout {
+  background-color: var(--card-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+}
+/* Decorative shape that sits behind the content to create depth */
+.decorative-shape {
+  position: fixed;
+  top: -20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150vw;
+  height: 150vh;
+  background: radial-gradient(circle at 50% 50%, rgba(184, 160, 249, 0.15), rgba(132, 197, 226, 0.12), rgba(247, 207, 231, 0.1), transparent 70%);
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  animation: moveShape 25s ease-in-out infinite alternate;
+}
+
+@keyframes moveShape {
+  from {
+    transform: translateX(-50%) translateY(-5%);
+  }
+  to {
+    transform: translateX(-50%) translateY(5%);
+  }
+}
+
+/* Gradient movement animation for quotes and outro */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Fade-in sections for micro-interactions */
+.fade-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Adjust hero image to show full image without cropping */
+/* Adjust hero image to show full image without cropping and fill the viewport width */
+/* Adjust hero image to show the full image without cropping; it keeps its natural aspect ratio */
+.hero-image img {
+  width: auto;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure hero image section expands full width */
+.hero-image {
+  width: 100%;
+}
+
+/* Override responsive hero height */
+@media (max-width: 768px) {
+  .hero-image img {
+    width: auto;
+    height: auto;
+    max-height: 60vh;
+  }
+}
+
+/* --------------------------------------------------------------
+   Hero section styles (new design)
+   The hero section spans the full width and showcases a landscape image
+   without cropping. A semi‑transparent overlay holds the quote at the
+   bottom of the image for a subtle, contemplative feel.
+--------------------------------------------------------------- */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.hero-section img {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: contain;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.45);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  max-width: 85%;
+  text-align: center;
+}
+
+.hero-overlay blockquote {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.hero-overlay .quote-author {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .hero-section img {
+    max-height: 60vh;
+  }
+  .hero-overlay {
+    padding: 0.8rem 1rem;
+  }
+  .hero-overlay blockquote {
+    font-size: 1.1rem;
+  }
+}
+
+/* --------------------------------------------------------------
+   Hero container styles for the landing page
+   The hero uses a split layout with text on one side and an
+   illustration on the other. The cta button invites readers to
+   explore the latest reflection. Responsive adjustments stack the
+   columns on narrow screens.
+-------------------------------------------------------------- */
+
+.hero-container {
+  padding: 5rem 0 3rem;
+}
+
+.hero-grid {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1;
+  z-index: 1;
+}
+
+.hero-heading {
+  font-family: 'Playfair Display', serif;
+  /* Larger headline to command attention on the landing page */
+  font-size: 3.6rem;
+  color: var(--highlight);
+  margin-bottom: 1.2rem;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--secondary-text);
+  max-width: 500px;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  padding: 0.8rem 1.6rem;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.03rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--button-hover);
+  color: var(--button-text);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.hero-media {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-media img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-heading {
+    font-size: 2.6rem;
+  }
+  .hero-media img {
+    max-height: 320px;
+    margin-top: 1rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+}
+
+/* --------------------------------------------------------------
+   Article specific themes
+   Each article page sets a unique body class (e.g. article-paradox)
+   which overrides the default accent, highlight and gradient colours.
+   This allows every essay to feel distinct while retaining the core
+   typography and layout of the site. The gradient accent influences
+   quote blocks, outro sections and decorative shapes.
+-------------------------------------------------------------- */
+
+/* Knowledge & Unlearning Paradox theme */
+body.article-paradox {
+  --accent: #bda1ff; /* luminous violet evokes mystical inquiry */
+  --highlight: #dccbf5;
+  --gradient-accent: linear-gradient(135deg, #2e2961, #182847, #413066);
+}
+
+/* Labels Perception Experiment theme */
+body.article-experiment {
+  --accent: #6bcfcf; /* tranquil teal symbolising clarity */
+  --highlight: #a0e8e5;
+  --gradient-accent: linear-gradient(135deg, #1d4e51, #2b6c70, #437f93);
+}
+
+/* Labels and Direct Perception theme */
+body.article-direct {
+  --accent: #89a7e0; /* serene blue for contemplative focus */
+  --highlight: #b7c7f1;
+  --gradient-accent: linear-gradient(135deg, #253f6b, #203a58, #2e537e);
+}
+
+/* Love vs Attachment theme */
+body.article-love {
+  --accent: #e4a0b7; /* gentle rose tones for themes of love */
+  --highlight: #f1c4d6;
+  --gradient-accent: linear-gradient(135deg, #47294b, #6c3c56, #7e4a67);
+}
+
+/* Layers of Māyā (Maya) theme */
+body.article-maya {
+  --accent: #8cb2c9; /* teal accents reflecting layered waves */
+  --highlight: #bed8e7;
+  --gradient-accent: linear-gradient(135deg, #193d53, #234b5f, #2f5167);
+}
+
+/* --------------------------------------------------------------
+   Post hero styles
+   Each article page begins with a hero banner containing the featured
+   image and the article title. The title sits in a semi‑transparent
+   overlay at the bottom of the image to aid legibility. The hero
+   adapts responsively, ensuring the full image is visible without
+   cropping on all screen sizes.
+-------------------------------------------------------------- */
+
+.post-hero {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.post-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.post-hero .post-hero-title {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  text-align: center;
+  max-width: 90%;
+}
+
+@media (max-width: 768px) {
+  .post-hero {
+    height: 40vh;
+  }
+  .post-hero .post-hero-title {
+    font-size: 1.6rem;
+    padding: 0.8rem 1.4rem;
+  }
+}

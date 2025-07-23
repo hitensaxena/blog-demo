@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog – Echoes</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="dark-mode">
+    <header class="site-header">
+      <div class="container">
+        <a href="index.html" class="logo">Echoes</a>
+        <nav id="nav" class="site-nav">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">🌓</button>
+      </div>
+    </header>
+
+    <!-- Background decorative shape across pages -->
+    <div class="decorative-shape"></div>
+
+    <main>
+      <section class="posts-list container" style="padding-top: 3rem;">
+        <h2>All Articles</h2>
+        <div class="post-cards">
+          <!-- Layers of Māyā -->
+          <article class="post-card">
+            <img src="images/maya-layers.png" alt="Abstract layers of waves" />
+            <div class="post-content">
+              <h3>Layers of Māyā — A Brief Journey Back Home</h3>
+              <p>
+                Discover how life’s episodes arise and dissolve, and what remains when every label is
+                stripped away.
+              </p>
+              <a href="post.html" class="read-more">Read more →</a>
+            </div>
+          </article>
+          <!-- Knowledge & Un‑learning Paradox -->
+          <article class="post-card">
+            <img src="images/paradox.png" alt="Cosmic swirl symbolising knowledge paradox" />
+            <div class="post-content">
+              <h3>Knowledge & Un‑learning: The Paradox of Knowing</h3>
+              <p>
+                A dialectical exploration of how intellectual refinement dissolves categories and why
+                intentional un‑knowing restores the mystery.
+              </p>
+              <a href="paradox.html" class="read-more">Read more →</a>
+            </div>
+          </article>
+          <!-- Labels Perception Experiment -->
+          <article class="post-card">
+            <img src="images/labels-experiment.png" alt="Abstract pastel shapes dissolving into dots" />
+            <div class="post-content">
+              <h3>Perception Experiments: Reimagining Labels</h3>
+              <p>
+                Four imaginative scenarios probe what happens to mind and society when names are
+                removed, minimised, intensified or replaced by relational frameworks.
+              </p>
+              <a href="experiment.html" class="read-more">Read more →</a>
+            </div>
+          </article>
+          <!-- Labels & Direct Perception -->
+          <article class="post-card">
+            <img src="images/direct-perception.png" alt="Landscape dissolving into light" />
+            <div class="post-content">
+              <h3>Labels & Direct Perception</h3>
+              <p>
+                An interdisciplinary inquiry into how labels shape psychological, spiritual and
+                philosophical realities — and how to taste the world directly.
+              </p>
+              <a href="direct.html" class="read-more">Read more →</a>
+            </div>
+          </article>
+          <!-- Love vs Attachment -->
+          <article class="post-card">
+            <img src="images/love-attachment.png" alt="Pastel flowing paths converging" />
+            <div class="post-content">
+              <h3>Love vs Attachment: Paths to Freedom</h3>
+              <p>
+                Contrast egoic attachment with the ontological constant of love and explore devotional
+                and knowledge paths to non‑dual realisation.
+              </p>
+              <a href="love.html" class="read-more">Read more →</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" id="contact">
+      <div class="container footer-inner">
+        <p>&copy; 2025 Echoes</p>
+        <div class="social-links">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
