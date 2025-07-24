@@ -1,7 +1,10 @@
 /*
-  style.css
 
-  This stylesheet defines the look and feel of the Inner Reflections blog.
+style.css
+
+
+
+This stylesheet defines the look and feel of the Inner Reflections blog.
   It uses CSS custom properties for easy theming and supports a dark mode.
 */
 
@@ -1233,4 +1236,20 @@ body.article-maya {
     font-size: 1.6rem;
     padding: 0.8rem 1.4rem;
   }
+}
+
+/* Minimal landing page: hide themes section and category labels */
+.themes {
+  display: none;
+}
+.recent-category {
+  display: none;
+}
+/* Intro section for introspective experience */
+.intro {
+  margin: 4rem 0;
+}
+.intro p {
+  margin-bottom: 1.5rem;
+  max-width: 60ch;
 }
